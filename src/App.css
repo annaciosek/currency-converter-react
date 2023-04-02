@@ -97,7 +97,7 @@ button:hover {
   transform: scale(1.08);
 }
 
-#result {
+.result {
   margin: 20px 0;
   display: inline-block;
   color: var(--light);
