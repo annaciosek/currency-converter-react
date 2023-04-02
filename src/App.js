@@ -1,7 +1,14 @@
 import "./App.css";
+import Intro from "./components/Intro";
 
 function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <main>
+      <div class="container">
+        <Intro />
+      </div>
+    </main>
+  );
 }
 
 export default App;
