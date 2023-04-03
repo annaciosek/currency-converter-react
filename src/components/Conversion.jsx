@@ -8,18 +8,28 @@ function Conversion() {
   const [amountValue, setAmountValue] = useState("");
   const [result, setResult] = useState("");
 
+  // button click action
   const handleClick = (event) => {
     event.preventDefault();
     axios
-      .get(`https://api.nbp.pl/api/exchangerates/tables/A/${currency}`)
-      .then((response) => {})
-      .catch((error) => {});
+      .get(`http://api.nbp.pl/api/exchangerates/rates/a/${currency}`)
+      .then((response) => {
+        setResult(
+          `${(response.data.rates[0].mid * amountValue).toFixed(2)} PLN`
+        );
+      })
+      .catch((error) => {
+        setResult(
+          "There was an error fetching data. Please refresh and try again."
+        );
+      });
   };
+
   return (
     <section className="conversion">
       <form>
         <label htmlFor="currency">Choose currency:</label>
-        <select id="currency" value={currentCurrency} onChange={handleCurrency}>
+        <select id="currency" value={currency} onChange={handleCurrency}>
           <option>EUR</option>
           <option>USD</option>
           <option>CHF</option>
@@ -31,7 +41,7 @@ function Conversion() {
           step="0.01"
           min="0.01"
           placeholder="Insert Amount"
-          onChange={handleInput}
+          onChange={handleAmount}
         ></input>
 
         <button type="submit" onClick={handleClick}>
@@ -39,7 +49,7 @@ function Conversion() {
         </button>
       </form>
 
-      <div className="result"></div>
+      <div className="result">{result}</div>
     </section>
   );
 }
