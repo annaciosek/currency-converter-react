@@ -11,18 +11,22 @@ function Conversion() {
   // button click action
   const handleClick = (event) => {
     event.preventDefault();
-    axios
-      .get(`http://api.nbp.pl/api/exchangerates/rates/a/${currency}`)
-      .then((response) => {
-        setResult(
-          `${(response.data.rates[0].mid * amountValue).toFixed(2)} PLN`
-        );
-      })
-      .catch((error) => {
-        setResult(
-          "There was an error fetching data. Please refresh and try again."
-        );
-      });
+    if (amountValue > 0) {
+      axios
+        .get(`http://api.nbp.pl/api/exchangerates/rates/a/${currency}`)
+        .then((response) => {
+          setResult(
+            `${(response.data.rates[0].mid * amountValue).toFixed(2)} PLN`
+          );
+        })
+        .catch((error) => {
+          setResult(
+            "There was an error fetching data. Please refresh and try again."
+          );
+        });
+    } else {
+      setResult("Amount must be bigger than 0");
+    }
   };
 
   return (
