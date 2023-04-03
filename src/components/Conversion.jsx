@@ -1,7 +1,13 @@
 import React from "react";
 import axios from "axios";
+import { useState } from "react";
 
 function Conversion() {
+  // states - currency, amount & result
+  const [currency, setCurrency] = useState("EUR");
+  const [amountValue, setAmountValue] = useState("");
+  const [result, setResult] = useState("");
+
   const handleClick = (event) => {
     event.preventDefault();
     axios
