@@ -105,27 +105,7 @@ button:hover {
   font-size: var(--font-m);
 }
 
-#loader {
-  display: none;
-  margin-bottom: 20px;
-}
-
-#loader:before {
-  content: "";
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 10px solid var(--accent);
-  border-top-color: #fff;
-  animation: spin 0.6s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* Media Queries */
 
 @media (min-width: 768px) {
   .intro {
