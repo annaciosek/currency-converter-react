@@ -29,6 +29,16 @@ function Conversion() {
     }
   };
 
+  // currency onChange
+  const handleCurrency = (event) => {
+    setCurrency(event.target.value);
+  };
+
+  // amount onChange
+  const handleAmount = (event) => {
+    setAmountValue(event.target.value);
+  };
+
   return (
     <section className="conversion">
       <form>
