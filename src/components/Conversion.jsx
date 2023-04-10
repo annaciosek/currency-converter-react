@@ -1,16 +1,15 @@
-import React from "react";
 import axios from "axios";
 import { useState } from "react";
 
 function Conversion() {
-  // states - currency, amount & result
-  const [currency, setCurrency] = useState("EUR");
-  const [amountValue, setAmountValue] = useState("");
+  // state for result
   const [result, setResult] = useState("");
 
-  // button click action
-  const handleClick = (event) => {
+  // handle submit
+  const handleSubmit = (event) => {
     event.preventDefault();
+    const amountValue = event.target.amount.value;
+    const currency = event.target.currency.value;
     if (amountValue > 0) {
       axios
         .get(`http://api.nbp.pl/api/exchangerates/rates/a/${currency}`)
@@ -29,24 +28,14 @@ function Conversion() {
     }
   };
 
-  // currency onChange
-  const handleCurrency = (event) => {
-    setCurrency(event.target.value);
-  };
-
-  // amount onChange
-  const handleAmount = (event) => {
-    setAmountValue(event.target.value);
-  };
-
   return (
     <section className="conversion">
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="currency">Choose currency:</label>
-        <select id="currency" value={currency} onChange={handleCurrency}>
-          <option>EUR</option>
-          <option>USD</option>
-          <option>CHF</option>
+        <select id="currency" name="currency">
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+          <option value="CHF">CHF</option>
         </select>
         <label htmlFor="amount">Amount:</label>
         <input
@@ -55,12 +44,10 @@ function Conversion() {
           step="0.01"
           min="0.01"
           placeholder="Insert Amount"
-          onChange={handleAmount}
+          name="amount"
         ></input>
 
-        <button type="submit" onClick={handleClick}>
-          Convert
-        </button>
+        <button type="submit">Convert</button>
       </form>
 
       <div className="result">{result}</div>
